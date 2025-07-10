@@ -1,29 +1,39 @@
 pipeline {
-  agent any
+    agent any
 
-  stages {
-    stage('Clone') {
-      steps {
-        echo 'Cloning repository...'
-      }
+    tools {
+        nodejs "Node 18" // Make sure this matches the name you gave in Global Tool Configuration
     }
 
-    stage('Install dependencies') {
-      steps {
-        bat 'npm install'
-      }
-    }
+    stages {
+        stage('Clone Code') {
+            steps {
+                git 'https://github.com/your-username/your-repo.git' // replace with your real repo
+            }
+        }
 
-    stage('Run tests') {
-      steps {
-        bat 'npm test' // Change if you don’t have tests
-      }
-    }
+        stage('Install Dependencies') {
+            steps {
+                sh 'npm install'
+            }
+        }
 
-    stage('Build') {
-      steps {
-        bat 'npm run build' // Optional, only if you have a build script
-      }
+        stage('Run Tests') {
+            steps {
+                sh 'npm test'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'npm run build'
+            }
+        }
+
+        stage('Start App') {
+            steps {
+                sh 'npm start &'
+            }
+        }
     }
-  }
 }
