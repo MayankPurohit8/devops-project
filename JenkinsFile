@@ -2,39 +2,37 @@ pipeline {
     agent any
 
     tools {
-        nodejs "Node 18" // Make sure this matches the name you gave in Global Tool Configuration
+        nodejs "Node 18"
     }
 
     stages {
         stage('Clone Code') {
             steps {
-               git branch: 'main', url: 'https://github.com/MayankPurohit8/devops-project.git'
-
- // replace with your real repo
+                git credentialsId: 'github-creds', branch: 'main', url: 'https://github.com/MayankPurohit8/devops-project.git'
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                sh 'npm install'
+                bat 'npm install'
             }
         }
 
         stage('Run Tests') {
             steps {
-                sh 'npm test'
+                bat 'npm test'
             }
         }
 
         stage('Build') {
             steps {
-                sh 'npm run build'
+                bat 'npm run build'
             }
         }
 
         stage('Start App') {
             steps {
-                sh 'npm start &'
+                bat 'start /B npm start'
             }
         }
     }
