@@ -2,13 +2,14 @@ pipeline {
     agent any
 
     tools {
-        nodejs "Node 18"
+        nodejs "Node 18" // Make sure this matches the name you gave in Global Tool Configuration
     }
 
     stages {
         stage('Clone Code') {
             steps {
-                git 'https://github.com/your-username/your-repo.git' 
+                git 'https://github.com/your-username/your-repo.git' // replace with your real repo
+            }
         }
 
         stage('Install Dependencies') {
