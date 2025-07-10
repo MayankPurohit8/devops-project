@@ -8,7 +8,8 @@ pipeline {
     stages {
         stage('Clone Code') {
             steps {
-                git branch: 'main', url: 'https://github.com/your-username/your-repo.git'
+               git branch: 'main', url: 'https://github.com/MayankPurohit8/devops-project.git'
+
  // replace with your real repo
             }
         }
